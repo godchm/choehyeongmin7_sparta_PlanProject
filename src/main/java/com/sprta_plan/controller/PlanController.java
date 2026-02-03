@@ -2,6 +2,7 @@ package com.sprta_plan.controller;
 
 
 import com.sprta_plan.dto.*;
+import com.sprta_plan.service.CommentService;
 import com.sprta_plan.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,12 +15,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlanController {
     private final PlanService planService;
+    private final CommentService commentService;
 
 
     // 생성
     @PostMapping("/plans")
     public ResponseEntity<CreatePlanResponse> creatPlan(@RequestBody CreatePlanRequest request){
         CreatePlanResponse result=planService.save(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+
+    }
+
+    @PostMapping("/plans/{planId}/comments")
+    public ResponseEntity<CreateCommentResponse> creatComment(
+            @RequestBody CreateCommentRequest request,
+            @PathVariable Long planId
+    ){
+        CreateCommentResponse result=commentService.commentsave(request,planId);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
 
     }

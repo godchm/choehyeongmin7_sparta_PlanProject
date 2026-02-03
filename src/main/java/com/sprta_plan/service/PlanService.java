@@ -2,13 +2,14 @@ package com.sprta_plan.service;
 
 
 import com.sprta_plan.dto.*;
+import com.sprta_plan.entity.Comment;
 import com.sprta_plan.entity.Plan;
+import com.sprta_plan.repository.CommentRepository;
 import com.sprta_plan.repository.PlanRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlanService {
     private final PlanRepository planRepository;
+    private final CommentRepository commentRepository;
 
 
     // 새 정보 입력
@@ -41,17 +43,15 @@ public class PlanService {
     // 단건 조회
     @Transactional(readOnly = true)
     public GetOnePlanResponse getOne(Long userId){
+        // 일정 한건 조회
         Plan plan=planRepository.findById(userId).orElseThrow(
                 ()-> new IllegalStateException("없는 유저 입니다.")
         );
-
+        // 해당 일정에 대한 모든 댓글 조회
+        List<Comment> commentslist = commentRepository.findByPlanId(plan.getId());
         return new GetOnePlanResponse(
-                plan.getId(),
-                plan.getTitle(),
-                plan.getContent(),
-                plan.getUser(),
-                plan.getCreatedAt(),
-                plan.getModifiedAt()
+                   plan,
+                commentslist
         );
 
     }
@@ -63,13 +63,8 @@ public class PlanService {
         List<GetOnePlanResponse> dtos=new ArrayList<>();
         for (Plan plan : plans) {
             GetOnePlanResponse dto= new GetOnePlanResponse(
-                    plan.getId(),
-                    plan.getTitle(),
-                    plan.getContent(),
-                    plan.getUser(),
-                    plan.getCreatedAt(),
-                    plan.getModifiedAt()
-            );
+                   plan,
+                    null);
             dtos.add(dto);
         }
         return dtos;

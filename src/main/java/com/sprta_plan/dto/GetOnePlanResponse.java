@@ -1,9 +1,13 @@
 package com.sprta_plan.dto;
 
 
+import com.sprta_plan.entity.Comment;
+import com.sprta_plan.entity.Plan;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Getter
 
 public class GetOnePlanResponse {
@@ -13,17 +17,19 @@ public class GetOnePlanResponse {
     private final String user;
     private final LocalDateTime createdAt;
     private final LocalDateTime modifiedAt;
+    private final List<Comment> comments;
 
 
-    public GetOnePlanResponse( Long id,String title, String content,String user,LocalDateTime createdAt, LocalDateTime modifiedAt) {
-
-        this.id=id;
-        this.title = title;
-        this.content=content;
-        this.user = user;
-        this.createdAt = createdAt;
-        this.modifiedAt = modifiedAt;
-
-
+    public GetOnePlanResponse(Plan plan, List<Comment> comments){
+        this.id= plan.getId();
+        this.title=plan.getTitle();
+        this.content= plan.getContent();
+        this.user=plan.getUser();
+        this.createdAt=plan.getCreatedAt();
+        this.modifiedAt=plan.getModifiedAt();
+        this.comments=comments;
     }
+
+
+
 }
