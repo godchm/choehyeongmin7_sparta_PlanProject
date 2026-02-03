@@ -10,10 +10,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PlanService {
     private final PlanRepository planRepository;
+
+
 
     @Transactional
     public CreatePlanResponse save(CreatePlanRequest request) {
@@ -34,9 +39,39 @@ public class PlanService {
         );
     }
 
+    @Transactional(readOnly = true)
+    public GetOnePlanResponse getOne(Long userId){
+        Plan plan=planRepository.findById(userId).orElseThrow(
+                ()-> new IllegalStateException("없는 유저 입니다.")
+        );
 
+        return new GetOnePlanResponse(
+                plan.getId(),
+                plan.getTitle(),
+                plan.getContent(),
+                plan.getUser(),
+                plan.getCreatedAt(),
+                plan.getModifiedAt()
+        );
 
+    }
 
+    @Transactional(readOnly = true)
+    public List<GetOnePlanResponse> getAll() {
+        List<Plan> plans=planRepository.findAllByOrderByModifiedAtDesc();
+        List<GetOnePlanResponse> dtos=new ArrayList<>();
+        for (Plan plan : plans) {
+            GetOnePlanResponse dto= new GetOnePlanResponse(
+                    plan.getId(),
+                    plan.getTitle(),
+                    plan.getContent(),
+                    plan.getUser(),
+                    plan.getCreatedAt(),
+                    plan.getModifiedAt()
+            );
+            dtos.add(dto);
+        }
+        return dtos;
 
-
+    }
 }
