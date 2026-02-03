@@ -28,9 +28,8 @@ public class Plan extends BaseEntity {
 
     }
 
-    public void planUpdate(String title,String content ,String user, String password){
+    public void planUpdate(String title ,String user, String password){
         this.title=title;
-        this.content=content;
         this.user=user;
         this.password=password;
     }
