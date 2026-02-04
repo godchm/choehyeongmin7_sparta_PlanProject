@@ -20,13 +20,31 @@ public class PlanController {
 
     // 생성.. 에러처리는 튜터님 도움 받음
     @PostMapping("/plans")
-    public ResponseEntity<?> createPlan(@RequestBody CreatePlanRequest request){
+    public ResponseEntity<?> createPlan(@RequestBody CreatePlanRequest request) {
 
-        CreatePlanResponse result=null;
-        try{
+        CreatePlanResponse result = null;
+        try {
             result = planService.save(request);
+        } catch (Exception e) {
+            // 데이터를 잘못보냈다. FORBIDDEN은 접근하지마 이런 느낌.
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        catch(Exception e){
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
+
+    }
+
+
+    // 댓글 생성... 에러처리는 튜터님 도움 받음
+    @PostMapping("/plans/{planId}/comments")
+    public ResponseEntity<?> createComment(
+            @RequestBody CreateCommentRequest request,
+            @PathVariable Long planId) {
+        CreateCommentResponse result = null;
+
+        try {
+            result = commentService.commentsave(request, planId);
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
         }
 
@@ -34,59 +52,53 @@ public class PlanController {
 
     }
 
-
-
-    // 댓글 생성... 에러처리는 튜터님 도움 받음
-    @PostMapping("/plans/{planId}/comments")
-    public ResponseEntity<?> createComment(
-            @RequestBody CreateCommentRequest request,
-            @PathVariable Long planId){
-    CreateCommentResponse result=null;
-
-    try{
-        result = commentService.commentsave(request, planId);
-    }
-    catch(Exception e){
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
-    }
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
-
-    }
-
     // 단건 조회
     @GetMapping("/plans/{planId}")
-    public ResponseEntity<GetOnePlanResponse> getOneUser(@PathVariable Long planId) {
-        GetOnePlanResponse result = planService.getOne(planId);
+    public ResponseEntity<?> getOneUser(@PathVariable Long planId) {
+        GetOnePlanResponse result=null;
+        try {
+             result= planService.getOne(planId);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+        }
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     // 모두 조회
     @GetMapping("/plans")
-    public ResponseEntity<List<GetOnePlanResponse>>getPlans(){
-        List<GetOnePlanResponse> result=planService.getAll();
+    public ResponseEntity<List<GetOnePlanResponse>> getPlans() {
+        List<GetOnePlanResponse> result = planService.getAll();
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
 
     // 수정
     @PutMapping("/plans/{planId}")
-    public ResponseEntity<UpdatePlanResponse> update(
+    public ResponseEntity<?> update(
             @PathVariable Long planId,
             @RequestBody UpdatePlanRequest request
-    ){
-        UpdatePlanResponse result=planService.update(planId,request);
+    ) {
+        UpdatePlanResponse result=null;
+        try {
+            result = planService.update(planId, request);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
         return ResponseEntity.status(HttpStatus.OK).body(result);
 
     }
 
     // 삭제 기능
     @DeleteMapping("/plans/{planId}")
-    public ResponseEntity<Void> delete(
+    public ResponseEntity<?> delete(
             @PathVariable Long planId,
             @RequestBody DeletePlanRequest request
-    ){
-        planService.delete(planId,request.getPassword());
+    ) {
+        try {
+            planService.delete(planId, request.getPassword());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

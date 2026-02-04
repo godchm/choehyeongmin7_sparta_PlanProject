@@ -65,9 +65,9 @@ public class PlanService {
 
     // 단건 조회
     @Transactional(readOnly = true)
-    public GetOnePlanResponse getOne(Long userId){
+    public GetOnePlanResponse getOne(Long planId){
         // 일정 한건 조회
-        Plan plan=planRepository.findById(userId).orElseThrow(
+        Plan plan=planRepository.findById(planId).orElseThrow(
                 ()-> new IllegalStateException("없는 유저 입니다.")
         );
         // 해당 일정에 대한 모든 댓글 조회
@@ -101,7 +101,7 @@ public class PlanService {
         Plan plan=planRepository.findById(planId).orElseThrow(
                 ()-> new IllegalStateException("없는 유저 입니다.")
         );
-        if(!plan.getPassword().equals(request.getPassword())){
+        if(plan.getPassword()==null||!plan.getPassword().equals(request.getPassword())){
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
 
@@ -140,7 +140,6 @@ public class PlanService {
 
             planRepository.deleteById(planId);
         }
-
 
 
     }
