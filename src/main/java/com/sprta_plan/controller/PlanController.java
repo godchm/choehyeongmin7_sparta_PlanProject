@@ -18,20 +18,38 @@ public class PlanController {
     private final CommentService commentService;
 
 
-    // 생성
+    // 생성.. 에러처리는 튜터님 도움 받음
     @PostMapping("/plans")
-    public ResponseEntity<CreatePlanResponse> creatPlan(@RequestBody CreatePlanRequest request){
-        CreatePlanResponse result=planService.save(request);
+    public ResponseEntity<?> createPlan(@RequestBody CreatePlanRequest request){
+
+        CreatePlanResponse result=null;
+        try{
+            result = planService.save(request);
+        }
+        catch(Exception e){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
 
     }
 
+
+
+    // 댓글 생성... 에러처리는 튜터님 도움 받음
     @PostMapping("/plans/{planId}/comments")
-    public ResponseEntity<CreateCommentResponse> creatComment(
+    public ResponseEntity<?> createComment(
             @RequestBody CreateCommentRequest request,
-            @PathVariable Long planId
-    ){
-        CreateCommentResponse result=commentService.commentsave(request,planId);
+            @PathVariable Long planId){
+    CreateCommentResponse result=null;
+
+    try{
+        result = commentService.commentsave(request, planId);
+    }
+    catch(Exception e){
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+    }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
 
     }

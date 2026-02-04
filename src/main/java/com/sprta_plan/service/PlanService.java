@@ -20,9 +20,12 @@ public class PlanService {
     private final CommentRepository commentRepository;
 
 
-    // 새 정보 입력
+    // 새 일정 입력
     @Transactional
     public CreatePlanResponse save(CreatePlanRequest request) {
+
+        requestPlanTest(request);
+
         Plan plan= new Plan(
                 request.getTitle(),
                 request.getContent(),
@@ -39,6 +42,26 @@ public class PlanService {
                 savedUser.getModifiedAt()
         );
     }
+
+
+    // 독립적인 관계이므로 if/else문이 아니라 if문으로 쓴다.
+     private void requestPlanTest(CreatePlanRequest request){
+
+        if (request.getTitle()==null||request.getTitle().trim().isEmpty() || request.getTitle().length()>30){
+            throw new IllegalArgumentException("일정 제목을 입력하거나, 일정 제목을 30자 이내로 입력하세요.");
+        }
+         if (request.getContent()==null||request.getContent().trim().isEmpty() || request.getContent().length()>200){
+             throw new IllegalArgumentException("일정 제목을 입력하거나, 일정 제목을 200자 이내로 입력하세요.");
+         }
+         // " " || null
+         if (request.getUser()==null||request.getUser().trim().isEmpty()){
+             throw new IllegalArgumentException("일정 사용자명은 필수로 입력하세요.");
+         }
+         if (request.getContent()==null||request.getPassword().trim().isEmpty()){
+             throw new IllegalArgumentException("일정 비밀번호는 필수로 입력하세요");
+         }
+
+     }
 
     // 단건 조회
     @Transactional(readOnly = true)

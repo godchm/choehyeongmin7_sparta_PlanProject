@@ -30,6 +30,8 @@ public class CommentService {
             throw new IllegalArgumentException("댓글은 10개까지만 가능합니다.");
         }
 
+        requestCommentTest(request);
+
         Comment comment= new Comment(
                 planId,
                 request.getUser(),
@@ -47,5 +49,22 @@ public class CommentService {
                 savedComment.getModifiedAt()
         );
     }
+
+
+    private void requestCommentTest(CreateCommentRequest request){
+
+        if (request.getContent()==null||request.getContent().trim().isEmpty() || request.getContent().length()>100){
+            throw new IllegalArgumentException("댓글 내용을 입력하거나, 댓글 내용을 100자 이내로 입력하세요.");
+        }
+        // " " || null
+        if (request.getUser()==null||request.getUser().trim().isEmpty()){
+            throw new IllegalArgumentException("댓글 사용자명은 필수로 입력하세요.");
+        }
+        if (request.getPassword()==null||request.getPassword().trim().isEmpty()){
+            throw new IllegalArgumentException("댓글 비밀번호는 필수로 입력하세요");
+        }
+
+    }
+
 
 }
