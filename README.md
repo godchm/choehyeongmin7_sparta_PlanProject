@@ -1,16 +1,19 @@
 일정 관리 API 명세서 
 ## 1. 일정 생성
-POST/ plans
+**POST** `/plans`
 
-Request Body
+#### Request Body
+```json
 {
    "title": "이야기1",
    "content": "재밌고 재밌는 이야기1",
    "user": "김두한1",
    "password": "12345678"
 }
+```
 
-Response (201 Created)
+#### Response (201 Created)
+```json
 {
    "id": 1,
    "title": "이야기1",
@@ -19,19 +22,21 @@ Response (201 Created)
    "createdAt": "2026-02-04T17:03:59.785175",
    "modifiedAt": "2026-02-04T17:03:59.785175"
 }
-
+```
 
 ## 2.댓글 생성 기능 
-POST /plans/{planID}/comments
+**POST** `/plans/{planID}/comments`
 
 Request Body
+```json
 {
    "user":"갓 김두한",
    "content":"나여 김두한",
    "password":"12345678"
 }
-
+```
 Response (201 Created)
+```json
 {
    "id": 1,
    "user": "갓 김두한",
@@ -39,7 +44,7 @@ Response (201 Created)
    "createdAt": "2026-02-04T17:07:30.827299",
    "modifiedAt": "2026-02-04T17:07:30.827299"
 }
-
+```
 ## 4. 일정 단건 조회
 GET/ plans/{planId}
 
@@ -47,6 +52,7 @@ Request
 GET/ plans/1
 
 Response (200 OK)
+```json
 {
   "comments": [
 {
@@ -66,11 +72,13 @@ Response (200 OK)
    "title": "이야기1",
    "user": "김두한1"
 }
+```
 
 ## 5. 일정 전체 조회
 GET /plans
    
 Response (200 OK)
+```json
 [
 {
    "comments": null,
@@ -127,18 +135,20 @@ Response (200 OK)
    "user": "김두한1"
 }
 ]
-
+```
 ## 6. 일정 수정
 PUT /plans/{planId}
 
 Request Body
+```json
 {
 "title":"이야기야",
 "user":"김두한211",
 "password":"12345678"
 }
-
+```
 Response (200 OK)
+```json
 {
 "id": 1,
 "title": "이야기야",
@@ -147,15 +157,16 @@ Response (200 OK)
 "createdAt": "2026-02-04T17:03:59.785175",
 "modifiedAt": "2026-02-04T17:03:59.785175"
 }
-
+```
 ## 7. 일정 삭제
 DELETE /plans/{planId}
 
 Request Body
+```json
 {
    "password":"12345678"
 }
-
+```
 Response (204 No Content)
 
 ## ERD
@@ -168,7 +179,7 @@ Response (204 No Content)
  구현 기능 
 1. 필수 Lv 1
 
- 구현 해야 하는 기능
+구현 해야 하는 기능
 나머지 필수 기능
 
 ## 2026.02.03 12:21
@@ -187,12 +198,12 @@ Response (204 No Content)
 구현 해야 하는 기능
 도전 기능
 
-##2026.02.03 19:16
+## 2026.02.03 19:16
 구현 기능
 1. 도전 Lv 5 댓글 생성
 2. 도전 Lv 6 댓글을 포함한 일정 단건 조회 
 
-특이사항
+# 특이사항
 도전 Lv6 일정 단건 조회 직접적인 도움을 받음. 기능 구현을 위해서 JPA 메서드 학습 필요.
 
 구현 해야 하는 기능
