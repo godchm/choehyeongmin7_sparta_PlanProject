@@ -1,4 +1,166 @@
-## 일정 관리 API
+일정 관리 API 명세서 
+## 1. 일정 생성
+POST/ plans
+
+Request Body
+{
+"title": "이야기1",
+"content": "재밌고 재밌는 이야기1",
+"user": "김두한1",
+"password": "12345678"
+}
+
+Response (201 Created)
+{
+"id": 1,
+"title": "이야기1",
+"content": "재밌고 재밌는 이야기1",
+"user": "김두한1",
+"createdAt": "2026-02-04T17:03:59.785175",
+"modifiedAt": "2026-02-04T17:03:59.785175"
+}
+
+
+## 2.댓글 생성 기능 
+POST /plans/{planID}/comments
+
+Request Body
+{
+"user":"갓 김두한",
+"content":"나여 김두한",
+"password":"12345678"
+}
+
+Response (201 Created)
+{
+"id": 1,
+"user": "갓 김두한",
+"content": "나여 김두한",
+"createdAt": "2026-02-04T17:07:30.827299",
+"modifiedAt": "2026-02-04T17:07:30.827299"
+}
+
+## 4. 일정 단건 조회
+GET/ plans/{planId}
+
+Request
+GET/ plans/1
+
+Response (200 OK)
+{
+"comments": [
+{
+"planId": 1,
+"user": "갓 김두한",
+"content": "나여 김두한",
+"password": "12345678",
+"createdAt": "2026-02-04T17:07:30.827299",
+"id": 1,
+"modifiedAt": "2026-02-04T17:07:30.827299"
+}
+],
+"content": "재밌고 재밌는 이야기1",
+"createdAt": "2026-02-04T17:03:59.785175",
+"id": 1,
+"modifiedAt": "2026-02-04T17:03:59.785175",
+"title": "이야기1",
+"user": "김두한1"
+}
+
+## 5. 일정 전체 조회
+GET /plans
+   
+Response (200 OK)
+[
+{
+"comments": null,
+"content": "재밌고 재밌는 이야기5",
+"createdAt": "2026-02-04T17:04:37.575689",
+"id": 6,
+"modifiedAt": "2026-02-04T17:04:37.575689",
+"title": "이야기5",
+"user": "김두한1"
+},
+{
+"comments": null,
+"content": "재밌고 재밌는 이야기4",
+"createdAt": "2026-02-04T17:04:34.602871",
+"id": 5,
+"modifiedAt": "2026-02-04T17:04:34.602871",
+"title": "이야기5",
+"user": "김두한1"
+},
+{
+"comments": null,
+"content": "재밌고 재밌는 이야기4",
+"createdAt": "2026-02-04T17:04:32.04016",
+"id": 4,
+"modifiedAt": "2026-02-04T17:04:32.04016",
+"title": "이야기4",
+"user": "김두한1"
+},
+{
+"comments": null,
+"content": "재밌고 재밌는 이야기3",
+"createdAt": "2026-02-04T17:04:27.600029",
+"id": 3,
+"modifiedAt": "2026-02-04T17:04:27.600029",
+"title": "이야기3",
+"user": "김두한1"
+},
+{
+"comments": null,
+"content": "재밌고 재밌는 이야기2",
+"createdAt": "2026-02-04T17:04:22.36984",
+"id": 2,
+"modifiedAt": "2026-02-04T17:04:22.36984",
+"title": "이야기2",
+"user": "김두한1"
+},
+{
+"comments": null,
+"content": "재밌고 재밌는 이야기1",
+"createdAt": "2026-02-04T17:03:59.785175",
+"id": 1,
+"modifiedAt": "2026-02-04T17:03:59.785175",
+"title": "이야기1",
+"user": "김두한1"
+}
+]
+
+## 6. 일정 수정
+PUT /plans/{planId}
+
+Request Body
+{
+"title":"이야기야",
+"user":"김두한211",
+"password":"12345678"
+}
+
+Response (200 OK)
+{
+"id": 1,
+"title": "이야기야",
+"content": "재밌고 재밌는 이야기1",
+"user": "김두한211",
+"createdAt": "2026-02-04T17:03:59.785175",
+"modifiedAt": "2026-02-04T17:03:59.785175"
+}
+
+## 7. 일정 삭제
+DELETE /plans/{planId}
+
+Request Body
+{
+   "password":"12345678"
+}
+
+Response (204 No Content)
+
+![planERd.png](../Downloads/planERd.png)
+
+## 일정 관리 구현 상황
 
 2026.02.02 20:32
 
