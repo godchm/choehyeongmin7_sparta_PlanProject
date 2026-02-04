@@ -158,7 +158,7 @@ Request Body
 
 Response (204 No Content)
 
-![planERd.png](../Downloads/planERd.png)
+<img width="454" height="1136" alt="Image" src="https://github.com/user-attachments/assets/74d1a644-088e-41da-abe6-2eba3c94c02c" />
 
 ## 일정 관리 구현 상황
 
