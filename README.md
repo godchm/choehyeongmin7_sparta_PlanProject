@@ -27,7 +27,7 @@
 ## 2.댓글 생성 기능 
 **POST** `/plans/{planID}/comments`
 
-Request Body
+#### Request Body
 ```json
 {
    "user":"갓 김두한",
@@ -35,7 +35,8 @@ Request Body
    "password":"12345678"
 }
 ```
-Response (201 Created)
+
+#### Response (201 Created)
 ```json
 {
    "id": 1,
@@ -46,12 +47,12 @@ Response (201 Created)
 }
 ```
 ## 4. 일정 단건 조회
-GET/ plans/{planId}
+**GET** `/ plans/{planId}`
 
-Request
-GET/ plans/1
+#### Request
+GET /plans/1
 
-Response (200 OK)
+#### Response (200 OK)
 ```json
 {
   "comments": [
@@ -75,9 +76,9 @@ Response (200 OK)
 ```
 
 ## 5. 일정 전체 조회
-GET /plans
-   
-Response (200 OK)
+**GET** `/plans`
+
+#### Response (200 OK)
 ```json
 [
 {
@@ -137,9 +138,9 @@ Response (200 OK)
 ]
 ```
 ## 6. 일정 수정
-PUT /plans/{planId}
+**PUT** `/plans/{planId}`
 
-Request Body
+#### Request Body
 ```json
 {
 "title":"이야기야",
@@ -147,7 +148,7 @@ Request Body
 "password":"12345678"
 }
 ```
-Response (200 OK)
+#### Response (200 OK)
 ```json
 {
 "id": 1,
@@ -159,63 +160,61 @@ Response (200 OK)
 }
 ```
 ## 7. 일정 삭제
-DELETE /plans/{planId}
+**DELETE** `/plans/{planId}`
 
-Request Body
+#### Request Body
 ```json
 {
    "password":"12345678"
 }
 ```
-Response (204 No Content)
+#### Response (204 No Content)
 
 ## ERD
 <img width="454" height="1136" alt="Image" src="https://github.com/user-attachments/assets/74d1a644-088e-41da-abe6-2eba3c94c02c" />
 
 ## 일정 관리 구현 상황
 
-## 2026.02.02 20:32
-
- 구현 기능 
+### 2026.02.02 20:32
+**구현 기능**
 1. 필수 Lv 1
 
-구현 해야 하는 기능
+**구현 해야 하는 기능**
 나머지 필수 기능
 
-## 2026.02.03 12:21
-
-구현 기능
+### 2026.02.03 12:21
+**구현 기능**
 1. 필수 Lv 2 조회 기능
 
-구현 해야 하는 기능
+**구현 해야 하는 기능**
 나머지 필수 기능
 
-## 2026.02.03 14:47
-구현 기능
+### 2026.02.03 14:47
+**구현 기능**
 1. 필수 Lv 3 일정 기능
 2. 필수 Lv 4 삭제 기능
  
-구현 해야 하는 기능
+**구현 해야 하는 기능**
 도전 기능
 
-## 2026.02.03 19:16
-구현 기능
+### 2026.02.03 19:16
+**구현 기능**
 1. 도전 Lv 5 댓글 생성
 2. 도전 Lv 6 댓글을 포함한 일정 단건 조회 
 
-# 특이사항
+**특이사항**
 도전 Lv6 일정 단건 조회 직접적인 도움을 받음. 기능 구현을 위해서 JPA 메서드 학습 필요.
 
 구현 해야 하는 기능
 도전 기능 Lv 7
 
-## 2026.02.04 11:59
-구현 기능
+### 2026.02.04 11:59
+**구현 기능**
 1. 도전 기능 Lv 7
 
-특이사항
+**특이사항**
 도전 Lv7 기능 구현에 있어서 조원에 도움을 받음. 예외처리부분을 배우고 적용시켰다. 예외처리부분 학습 필요.
 
-구현 해야 하는 기능
+**구현 해야 하는 기능**
 1. API 명세서  
 2. ERD
