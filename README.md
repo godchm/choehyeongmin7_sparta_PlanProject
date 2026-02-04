@@ -1,4 +1,4 @@
-일정 관리 API 명세서 
+# 일정 관리 API 명세서 
 ## 1. 일정 생성
 **POST** `/plans`
 
@@ -170,10 +170,10 @@ GET /plans/1
 ```
 #### Response (204 No Content)
 
-## ERD
+# ERD
 <img width="454" height="1136" alt="Image" src="https://github.com/user-attachments/assets/74d1a644-088e-41da-abe6-2eba3c94c02c" />
 
-## 일정 관리 구현 상황
+# 일정 관리 구현 상황
 
 ### 2026.02.02 20:32
 **구현 기능**
