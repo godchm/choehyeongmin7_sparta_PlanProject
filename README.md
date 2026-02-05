@@ -46,6 +46,8 @@
 
 ## ⚙️ 설치 및 실행
 ### 1. 프로젝트 클론
+
+```bash
 git clone https://github.com/godchm/choehyeongmin7_sparta_PlanProject.git
 cd choehyeongmin7_sparta_PlanProject
 
@@ -75,6 +77,7 @@ java -jar build/libs/Sprta_plan-0.0.1-SNAPSHOT.jar
 
 ### 5.접속 확인
 브라우저에서 http://localhost:8080 접속
+```
 
 # 일정 관리 API 명세서 
 ## 1. 일정 생성
