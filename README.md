@@ -54,7 +54,7 @@ cd choehyeongmin7_sparta_PlanProject
 ### 2.데이터베이스 설정
 ```bash
 // MySQL에서 데이터베이스 생성
-// ※ 애플리케이션 실행 시 JPA(Hibernate)가 테이블을 자동 생성합니다.
+// 애플리케이션 실행 시 JPA(Hibernate)가 테이블을 자동 생성합니다.
 CREATE DATABASE plan CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 ### 3.애플리케이션 설정
@@ -78,10 +78,6 @@ spring.jpa.show-sql=true
 ```bash
 ./gradlew build
 java -jar build/libs/Sprta_plan-0.0.1-SNAPSHOT.jar
-```
-### 5.접속 확인
-```bash
-브라우저에서 http://localhost:8080 접속
 ```
 
 # 일정 관리 API 명세서 
