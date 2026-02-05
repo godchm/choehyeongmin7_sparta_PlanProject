@@ -50,13 +50,15 @@
 ```bash
 git clone https://github.com/godchm/choehyeongmin7_sparta_PlanProject.git
 cd choehyeongmin7_sparta_PlanProject
-
+```
 ### 2.데이터베이스 설정
+```bash
 // MySQL에서 데이터베이스 생성
 // ※ 애플리케이션 실행 시 JPA(Hibernate)가 테이블을 자동 생성합니다.
 CREATE DATABASE plan CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
+```
 ### 3.애플리케이션 설정
+```bash
 src/main/resources/application.properties 파일에서 데이터베이스 정보를 설정.
 
 spring.datasource.url=jdbc:mysql://localhost:3306/plan
@@ -65,17 +67,20 @@ spring.datasource.password=YOUR_PASSWORD
 
 spring.jpa.hibernate.ddl-auto=create
 spring.jpa.show-sql=true
-
+```
 
 ### 4.애플리케이션 실행
 #### Gradle 실행
+```bash
 ./gradlew bootRun
-
+```
 #### 또는 JAR 파일 실행
+```bash
 ./gradlew build
 java -jar build/libs/Sprta_plan-0.0.1-SNAPSHOT.jar
-
+```
 ### 5.접속 확인
+```bash
 브라우저에서 http://localhost:8080 접속
 ```
 
